@@ -1,0 +1,20 @@
+{
+  "restaurants": [
+    { "id": "r1", "name": "Meghana Foods", "cuisine": ["Biryani", "Andhra"], "rating": 4.4, "popularity": 500, "type": "restaurant" },
+    { "id": "r2", "name": "Chinese Wok", "cuisine": ["Chinese", "Asian"], "rating": 3.9, "popularity": 200, "type": "restaurant" },
+    { "id": "r3", "name": "Truffles", "cuisine": ["American", "Continental"], "rating": 4.6, "popularity": 600, "type": "restaurant" },
+    { "id": "r4", "name": "Empire Restaurant", "cuisine": ["Mughlai", "North Indian"], "rating": 4.1, "popularity": 450, "type": "restaurant" }
+  ],
+  "dishes": [
+    { "id": "d1", "name": "Chicken Biryani", "restaurant_id": "r1", "restaurant_name": "Meghana Foods", "rating": 4.5, "popularity": 900, "type": "dish" },
+    { "id": "d2", "name": "Mutton Biryani", "restaurant_id": "r1", "restaurant_name": "Meghana Foods", "rating": 4.3, "popularity": 400, "type": "dish" },
+    { "id": "d3", "name": "Chilli Paneer", "restaurant_id": "r2", "restaurant_name": "Chinese Wok", "rating": 4.0, "popularity": 150, "type": "dish" },
+    { "id": "d4", "name": "Chicken Hakka Noodles", "restaurant_id": "r2", "restaurant_name": "Chinese Wok", "rating": 4.1, "popularity": 300, "type": "dish" },
+    { "id": "d5", "name": "All American Cheese Burger", "restaurant_id": "r3", "restaurant_name": "Truffles", "rating": 4.7, "popularity": 800, "type": "dish" },
+    { "id": "d6", "name": "Peri Peri Chicken Steak", "restaurant_id": "r3", "restaurant_name": "Truffles", "rating": 4.6, "popularity": 500, "type": "dish" },
+    { "id": "d7", "name": "Ghee Roast Chicken", "restaurant_id": "r4", "restaurant_name": "Empire Restaurant", "rating": 4.2, "popularity": 350, "type": "dish" },
+    { "id": "d8", "name": "Paneer Tikka", "restaurant_id": "r4", "restaurant_name": "Empire Restaurant", "rating": 4.0, "popularity": 250, "type": "dish" },
+    { "id": "d9", "name": "Chicken Wok Tossed Rice", "restaurant_id": "r2", "restaurant_name": "Chinese Wok", "rating": 3.8, "popularity": 180, "type": "dish" },
+    { "id": "d10", "name": "Veg Biryani", "restaurant_id": "r1", "restaurant_name": "Meghana Foods", "rating": 4.2, "popularity": 250, "type": "dish" }
+  ]
+}
