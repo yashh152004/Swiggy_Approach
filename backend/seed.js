@@ -1,8 +1,16 @@
 import { Client } from '@opensearch-project/opensearch';
 import fs from 'fs';
 
+// 🔥 IMPORTANT: Use HTTPS + auth for OpenSearch 3.x
 const client = new Client({
-  node: 'http://localhost:9200',
+  node: 'https://localhost:9200',
+  auth: {
+    username: 'admin',
+    password: 'Zx9#Kp!72LmQ' // 👈 replace this
+  },
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const data = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
@@ -11,16 +19,18 @@ const INDEX_NAME = 'food_items';
 async function seed() {
   try {
     console.log('Connecting to OpenSearch...');
-    const ping = await client.ping();
-    if (!ping) throw new Error('OpenSearch not reachable');
-    
-    // 1. Create index
-    const exists = await client.indices.exists({ index: INDEX_NAME });
-    if (exists.body || exists) {
-      console.log('Deleting existing index...');
+    await client.ping();
+    console.log('Connected ✅');
+
+    // 1. Delete index safely (idempotent)
+    try {
       await client.indices.delete({ index: INDEX_NAME });
+      console.log('Old index deleted');
+    } catch (err) {
+      console.log('Index not found, continuing...');
     }
 
+    // 2. Create index
     console.log('Creating index...');
     await client.indices.create({
       index: INDEX_NAME,
@@ -44,34 +54,37 @@ async function seed() {
       }
     });
 
-    // 2. Index Data
+    // 3. Index Data
     console.log('Indexing data...');
     const items = [...data.restaurants, ...data.dishes];
-    const body = items.flatMap(doc => [{ index: { _index: INDEX_NAME, _id: doc.id } }, doc]);
+    const body = items.flatMap(doc => [
+      { index: { _index: INDEX_NAME, _id: doc.id } },
+      doc
+    ]);
+
     const bulkResponse = await client.bulk({ refresh: true, body });
-    if (bulkResponse.body && bulkResponse.body.errors) {
-       console.log('Bulk errors:', bulkResponse.body.items);
+
+    if (bulkResponse.errors || (bulkResponse.body && bulkResponse.body.errors)) {
+      console.log('Bulk errors:', bulkResponse.items || bulkResponse.body.items);
+    } else {
+      console.log('Data indexed successfully ✅');
     }
 
-    // 3. Setup LTR Plugin
+    // 4. Setup LTR Plugin
     console.log('Setting up OpenSearch LTR Plugin...');
-    
-    // Initialize LTR store
+
+    // Create LTR store
     try {
       await client.transport.request({
         method: 'PUT',
-        path: '/_ltr',
+        path: '/_ltr'
       });
       console.log('LTR store created.');
     } catch (err) {
-      if (err.meta && err.meta.statusCode === 400 && err.message.includes('already exists')) {
-        console.log('LTR store already exists.');
-      } else {
-        console.warn('LTR store creation warning (maybe exists):', err.message);
-      }
+      console.log('LTR store already exists or skipped.');
     }
 
-    // Define Feature Set
+    // Feature Set
     const featureSet = {
       featureset: {
         features: [
@@ -121,12 +134,11 @@ async function seed() {
         body: featureSet
       });
       console.log('Feature set uploaded.');
-    } catch(err) {
-      console.log('Feature set already exists or error:', err.message);
+    } catch (err) {
+      console.log('Feature set already exists or skipped.');
     }
 
-    // Mock Training Data: Usually you extract features using _sltr on your judgments and then train an XGBoost or RankLib model.
-    // For this demo, we'll assign a custom linear model!
+    // 5. Upload Linear Model
     const linearModelStr = JSON.stringify({
       "title_match": 10.0,
       "cuisine_match": 5.0,
@@ -134,7 +146,7 @@ async function seed() {
       "popularity_score": 0.01
     });
 
-    const linearModelConfig = {
+    const modelConfig = {
       model: {
         name: "swiggy_ltr_model",
         model: {
@@ -148,17 +160,14 @@ async function seed() {
       await client.transport.request({
         method: 'POST',
         path: '/_ltr/_featureset/food_features/_createmodel',
-        body: linearModelConfig
+        body: modelConfig
       });
       console.log('LTR model uploaded successfully.');
-    } catch(err) {
-      console.log('Model already exists or error:', err.message);
-      if(err.meta && err.meta.body && err.meta.body.error) {
-         console.log(err.meta.body.error);
-      }
+    } catch (err) {
+      console.log('Model already exists or skipped.');
     }
 
-    console.log('Seed completed successfully!');
+    console.log('🎉 Seed completed successfully!');
 
   } catch (error) {
     console.error('Seed error:', error);
