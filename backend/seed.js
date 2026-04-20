@@ -3,14 +3,7 @@ import fs from 'fs';
 
 // 🔥 IMPORTANT: Use HTTPS + auth for OpenSearch 3.x
 const client = new Client({
-  node: 'https://localhost:9200',
-  auth: {
-    username: 'admin',
-    password: 'Zx9#Kp!72LmQ' // 👈 replace this
-  },
-  ssl: {
-    rejectUnauthorized: false
-  }
+  node: 'http://localhost:9200'
 });
 
 const data = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
