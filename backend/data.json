@@ -1,9 +1,13 @@
 {
   "restaurants": [
-    { "id": "r1", "name": "Meghana Foods", "cuisine": ["Biryani", "Andhra"], "rating": 4.4, "popularity": 500, "type": "restaurant" },
-    { "id": "r2", "name": "Chinese Wok", "cuisine": ["Chinese", "Asian"], "rating": 3.9, "popularity": 200, "type": "restaurant" },
-    { "id": "r3", "name": "Truffles", "cuisine": ["American", "Continental"], "rating": 4.6, "popularity": 600, "type": "restaurant" },
-    { "id": "r4", "name": "Empire Restaurant", "cuisine": ["Mughlai", "North Indian"], "rating": 4.1, "popularity": 450, "type": "restaurant" }
+    { "id": "r1", "name": "Meghana Foods", "cuisine": ["Biryani", "Andhra", "South Indian"], "rating": 4.4, "popularity": 500, "type": "restaurant" },
+    { "id": "r2", "name": "Chinese Wok", "cuisine": ["Chinese", "Asian", "Tibetan"], "rating": 3.9, "popularity": 200, "type": "restaurant" },
+    { "id": "r3", "name": "Truffles", "cuisine": ["American", "Continental", "Italian", "Desserts"], "rating": 4.6, "popularity": 600, "type": "restaurant" },
+    { "id": "r4", "name": "Empire Restaurant", "cuisine": ["Mughlai", "North Indian", "Kebabs"], "rating": 4.1, "popularity": 450, "type": "restaurant" },
+    { "id": "r5", "name": "Leon's Burgers & Wings", "cuisine": ["American", "Fast Food"], "rating": 4.3, "popularity": 550, "type": "restaurant" },
+    { "id": "r6", "name": "Nandhana Palace", "cuisine": ["Andhra", "Biryani", "South Indian"], "rating": 4.2, "popularity": 380, "type": "restaurant" },
+    { "id": "r7", "name": "KFC", "cuisine": ["American", "Fast Food"], "rating": 4.0, "popularity": 700, "type": "restaurant" },
+    { "id": "r8", "name": "Domino's Pizza", "cuisine": ["Pizzas", "Italian", "Fast Food"], "rating": 4.2, "popularity": 800, "type": "restaurant" }
   ],
   "dishes": [
     { "id": "d1", "name": "Chicken Biryani", "restaurant_id": "r1", "restaurant_name": "Meghana Foods", "rating": 4.5, "popularity": 900, "type": "dish" },
@@ -15,6 +19,16 @@
     { "id": "d7", "name": "Ghee Roast Chicken", "restaurant_id": "r4", "restaurant_name": "Empire Restaurant", "rating": 4.2, "popularity": 350, "type": "dish" },
     { "id": "d8", "name": "Paneer Tikka", "restaurant_id": "r4", "restaurant_name": "Empire Restaurant", "rating": 4.0, "popularity": 250, "type": "dish" },
     { "id": "d9", "name": "Chicken Wok Tossed Rice", "restaurant_id": "r2", "restaurant_name": "Chinese Wok", "rating": 3.8, "popularity": 180, "type": "dish" },
-    { "id": "d10", "name": "Veg Biryani", "restaurant_id": "r1", "restaurant_name": "Meghana Foods", "rating": 4.2, "popularity": 250, "type": "dish" }
+    { "id": "d10", "name": "Veg Biryani", "restaurant_id": "r1", "restaurant_name": "Meghana Foods", "rating": 4.2, "popularity": 250, "type": "dish" },
+    { "id": "d11", "name": "Zinger Burger", "restaurant_id": "r7", "restaurant_name": "KFC", "rating": 4.4, "popularity": 600, "type": "dish" },
+    { "id": "d12", "name": "Hot Wings", "restaurant_id": "r7", "restaurant_name": "KFC", "rating": 4.5, "popularity": 450, "type": "dish" },
+    { "id": "d13", "name": "Margherita Pizza", "restaurant_id": "r8", "restaurant_name": "Domino's Pizza", "rating": 4.1, "popularity": 750, "type": "dish" },
+    { "id": "d14", "name": "Pepperoni Pizza", "restaurant_id": "r8", "restaurant_name": "Domino's Pizza", "rating": 4.6, "popularity": 650, "type": "dish" },
+    { "id": "d15", "name": "Chocolate Truffle Cake", "restaurant_id": "r3", "restaurant_name": "Truffles", "rating": 4.8, "popularity": 550, "type": "dish" },
+    { "id": "d16", "name": "Lemon Coriander Soup", "restaurant_id": "r2", "restaurant_name": "Chinese Wok", "rating": 3.9, "popularity": 120, "type": "dish" },
+    { "id": "d17", "name": "Jumbo Chicken Wrap", "restaurant_id": "r5", "restaurant_name": "Leon's Burgers & Wings", "rating": 4.3, "popularity": 320, "type": "dish" },
+    { "id": "d18", "name": "Spicy Paneer Burger", "restaurant_id": "r5", "restaurant_name": "Leon's Burgers & Wings", "rating": 4.2, "popularity": 280, "type": "dish" },
+    { "id": "d19", "name": "Butter Chicken", "restaurant_id": "r4", "restaurant_name": "Empire Restaurant", "rating": 4.5, "popularity": 500, "type": "dish" },
+    { "id": "d20", "name": "Andhra Meals", "restaurant_id": "r6", "restaurant_name": "Nandhana Palace", "rating": 4.4, "popularity": 420, "type": "dish" }
   ]
 }

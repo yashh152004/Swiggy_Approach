@@ -72,7 +72,7 @@ app.get('/api/search', async (req, res) => {
               multi_match: {
                 query: q,
                 fields: ['name^3', 'cuisine^2', 'restaurant_name^1'],
-                fuzziness: 'AUTO'
+                type: 'phrase_prefix'
               }
             },
             functions: [
@@ -82,7 +82,7 @@ app.get('/api/search', async (req, res) => {
             boost_mode: "multiply"
           }
         },
-        size: 8
+        size: 15
       };
     } else {
       // Phase 2: ML-Based Ranking (LTR)
@@ -92,7 +92,7 @@ app.get('/api/search', async (req, res) => {
           multi_match: {
              query: q,
              fields: ['name', 'cuisine', 'restaurant_name'],
-             fuzziness: 'AUTO'
+             type: 'phrase_prefix'
           }
         },
         rescore: {

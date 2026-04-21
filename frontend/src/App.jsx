@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, MapPin, ChevronDown, User, ShoppingBag, Star, Clock } from 'lucide-react';
+import { Search, MapPin, ChevronDown, User, ShoppingBag, Star, Clock, Menu } from 'lucide-react';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -53,7 +53,7 @@ function App() {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query, isLTR]);
 
   const handleSuggestionClick = (item) => {
     setQuery(item.name);
@@ -65,30 +65,33 @@ function App() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-8">
-              <div className="flex items-center gap-2 cursor-pointer text-orange-500 font-extrabold text-3xl tracking-tight">
+            <div className="flex items-center gap-4 sm:gap-8">
+              <div className="flex items-center gap-2 cursor-pointer text-orange-500 font-extrabold text-2xl sm:text-3xl tracking-tight">
                 <span>Foodie</span>
               </div>
               <div className="hidden md:flex items-center gap-2 text-sm text-gray-600 hover:text-orange-500 transition-colors cursor-pointer">
                 <span className="font-bold border-b-2 border-gray-800 text-gray-800 pb-0.5">Other</span>
-                <span className="text-gray-500 truncate max-w-[200px]">Bengaluru, Karnataka, India</span>
+                <span className="text-gray-500 truncate max-w-[150px] lg:max-w-[200px]">Bengaluru, Karnataka, India</span>
                 <ChevronDown size={18} className="text-orange-500" />
               </div>
             </div>
 
-            <nav className="flex items-center gap-8">
-              <div className="hidden lg:flex items-center gap-3 text-gray-800 hover:text-orange-500 cursor-pointer font-semibold transition-colors">
+            <nav className="flex items-center gap-6 sm:gap-8">
+              <div className="hidden lg:flex items-center gap-2 text-gray-800 hover:text-orange-500 cursor-pointer font-semibold transition-colors">
                  <Search size={22} className="text-gray-600" />
                  <span>Search</span>
               </div>
-              <div className="hidden lg:flex items-center gap-3 text-gray-800 hover:text-orange-500 cursor-pointer font-semibold transition-colors">
+              <div className="hidden lg:flex items-center gap-2 text-gray-800 hover:text-orange-500 cursor-pointer font-semibold transition-colors">
                  <User size={22} className="text-gray-600" />
                  <span>Sign In</span>
               </div>
-              <div className="flex items-center gap-3 text-gray-800 hover:text-orange-500 cursor-pointer font-semibold transition-colors relative">
+              <div className="flex items-center gap-2 text-gray-800 hover:text-orange-500 cursor-pointer font-semibold transition-colors relative">
                  <ShoppingBag size={22} className="text-gray-600" />
-                 <span>Cart</span>
+                 <span className="hidden sm:inline">Cart</span>
                  <span className="absolute -top-1.5 -right-2 bg-orange-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+              </div>
+              <div className="lg:hidden flex items-center text-gray-800 hover:text-orange-500 cursor-pointer transition-colors">
+                 <Menu size={28} />
               </div>
             </nav>
           </div>
@@ -96,61 +99,61 @@ function App() {
       </header>
 
       <main className="flex-grow">
-        <div className="bg-gradient-to-b from-gray-50 to-white py-16 border-b border-gray-100">
+        <div className="bg-gradient-to-b from-gray-50 to-white py-12 sm:py-16 border-b border-gray-100">
           <div className="max-w-3xl mx-auto px-4 relative flex flex-col items-center" ref={dropdownRef}>
-            <div className="flex items-center justify-center gap-4 mb-6">
-               <span className={`text-sm font-bold ${!isLTR ? 'text-orange-600' : 'text-gray-400'}`}>Basic Search</span>
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6">
+               <span className={`text-xs sm:text-sm font-bold ${!isLTR ? 'text-orange-600' : 'text-gray-400'}`}>Basic Search</span>
                <button 
                  onClick={() => setIsLTR(!isLTR)}
-                 className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors ${isLTR ? 'bg-orange-500' : 'bg-gray-300'}`}
+                 className={`w-12 h-6 sm:w-14 sm:h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors ${isLTR ? 'bg-orange-500' : 'bg-gray-300'}`}
                >
-                 <div className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-transform ${isLTR ? 'translate-x-7' : 'translate-x-0'}`}></div>
+                 <div className={`bg-white w-4 h-4 sm:w-5 sm:h-5 rounded-full shadow-md transform transition-transform ${isLTR ? 'translate-x-6 sm:translate-x-7' : 'translate-x-0'}`}></div>
                </button>
-               <span className={`text-sm font-bold flex items-center gap-1 ${isLTR ? 'text-orange-600' : 'text-gray-400'}`}>ML Ranking (LTR) <Star size={12} className={isLTR ? "fill-orange-500" : ""}/></span>
+               <span className={`text-xs sm:text-sm font-bold flex items-center gap-1 ${isLTR ? 'text-orange-600' : 'text-gray-400'}`}>ML Ranking (LTR) <Star size={12} className={isLTR ? "fill-orange-500" : ""}/></span>
             </div>
-            <h1 className="text-4xl font-extrabold text-gray-900 mb-8 text-center tracking-tight">What are you craving today?</h1>
-            <div className="relative w-full shadow-2xl rounded-2xl hover:shadow-orange-100/50 transition-shadow">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6 sm:mb-8 text-center tracking-tight">What are you craving today?</h1>
+            <div className="relative w-full shadow-xl sm:shadow-2xl rounded-2xl hover:shadow-orange-100/50 transition-shadow">
               <input
                 type="text"
-                className="w-full h-[72px] pl-16 pr-8 bg-white border border-gray-200 rounded-2xl text-xl font-medium focus:outline-none focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500 transition-all placeholder-gray-400 text-gray-800"
+                className="w-full h-14 sm:h-[72px] pl-14 sm:pl-16 pr-8 bg-white border border-gray-200 rounded-2xl text-lg sm:text-xl font-medium focus:outline-none focus:ring-4 focus:ring-orange-500/20 focus:border-orange-500 transition-all placeholder-gray-400 text-gray-800"
                 placeholder="Search for restaurants and food..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-              <div className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400">
-                <Search size={28} className="text-gray-400" />
+              <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 text-gray-400">
+                <Search size={24} className="sm:w-7 sm:h-7 text-gray-400" />
               </div>
               {loading && (
-                <div className="absolute right-6 top-1/2 -translate-y-1/2">
-                  <div className="w-6 h-6 border-[3px] border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 border-[3px] border-orange-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
               )}
             </div>
 
             {showDropdown && suggestions.length > 0 && (
-              <div className="absolute w-full mt-24 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden transform opacity-100 scale-100 transition-all duration-200 origin-top">
-                <ul className="py-2">
+              <div className="absolute w-full mt-[180px] sm:mt-24 top-0 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden transform opacity-100 scale-100 transition-all duration-200 origin-top">
+                <ul className="py-2 max-h-[60vh] overflow-y-auto">
                   {suggestions.map((item, index) => (
                     <li
                       key={index}
-                      className="flex items-center gap-5 px-6 py-4 hover:bg-orange-50 cursor-pointer transition-colors group"
+                      className="flex items-center gap-4 sm:gap-5 px-4 sm:px-6 py-3 sm:py-4 hover:bg-orange-50 cursor-pointer transition-colors group"
                       onClick={() => handleSuggestionClick(item)}
                     >
-                      <div className="w-14 h-14 rounded-xl bg-gray-50 group-hover:bg-white border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-orange-500 transition-colors flex-shrink-0 shadow-sm">
-                        {item.type === 'restaurant' ? <MapPin size={26}/> : <Search size={24}/>}
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 group-hover:bg-white border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-orange-500 transition-colors flex-shrink-0 shadow-sm">
+                        {item.type === 'restaurant' ? <MapPin size={24} className="sm:w-6 sm:h-6"/> : <Search size={20} className="sm:w-6 sm:h-6"/>}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-bold text-gray-800 text-lg truncate group-hover:text-orange-600 transition-colors">{item.name}</div>
-                        <div className="text-sm text-gray-500 font-medium truncate mt-0.5">
+                        <div className="font-bold text-gray-800 text-base sm:text-lg truncate group-hover:text-orange-600 transition-colors">{item.name}</div>
+                        <div className="text-xs sm:text-sm text-gray-500 font-medium truncate mt-0.5">
                           {item.type === 'dish' ? (
-                            <span className="flex items-center gap-1.5"><Star size={14} className="text-yellow-500 fill-current"/> Dish by {item.restaurant_name}</span>
+                            <span className="flex items-center gap-1.5"><Star size={12} className="sm:w-3.5 sm:h-3.5 text-yellow-500 fill-current"/> Dish by {item.restaurant_name}</span>
                           ) : (
                             <span className="flex items-center gap-1.5">{item.cuisine?.join(', ')}</span>
                           )}
                         </div>
                       </div>
                       {item.score && (
-                         <div className="text-xs font-mono font-medium text-gray-500 bg-gray-100 group-hover:bg-white px-2.5 py-1 rounded-md border border-gray-200">
+                         <div className="text-[10px] sm:text-xs font-mono font-medium text-gray-500 bg-gray-100 group-hover:bg-white px-2 py-1 sm:px-2.5 rounded-md border border-gray-200">
                            Score: {item.score.toFixed(2)}
                          </div>
                       )}
