@@ -9,6 +9,7 @@ export function useSearch() {
   const [isLTR, setIsLTR] = useState(false);
   const [error, setError] = useState(null);
 
+  // Debounce the user input
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(query);
@@ -16,6 +17,7 @@ export function useSearch() {
     return () => clearTimeout(timer);
   }, [query]);
 
+  // Fetch search results on query or mode change
   useEffect(() => {
     let isMounted = true;
 
