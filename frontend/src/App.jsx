@@ -23,6 +23,20 @@ function App() {
   } = useRestaurants();
 
   const [showDropdown, setShowDropdown] = useState(false);
+  const [activeResults, setActiveResults] = useState(null);
+
+  // When a user selects a suggestion or submits, we display the results below
+  const handleSearchSubmit = (resultsList) => {
+    setActiveResults(resultsList);
+    setShowDropdown(false);
+  };
+
+  const isShowingSearchResults = query.length > 0 && activeResults !== null;
+  const displayedItems = isShowingSearchResults ? activeResults : restaurants;
+  const listTitle = isShowingSearchResults 
+    ? `Search Results for "${query}"` 
+    : "Top restaurant chains in Bengaluru";
+  const listLoading = isShowingSearchResults ? searchLoading : restaurantsLoading;
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans">
@@ -38,10 +52,12 @@ function App() {
           showDropdown={showDropdown}
           setShowDropdown={setShowDropdown}
           error={searchError}
+          onSubmit={() => handleSearchSubmit(suggestions)}
         />
         <RestaurantList 
-          restaurants={restaurants}
-          loading={restaurantsLoading}
+          items={displayedItems}
+          title={listTitle}
+          loading={listLoading}
           error={restaurantsError}
         />
       </main>
