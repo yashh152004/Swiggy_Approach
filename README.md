@@ -87,3 +87,6 @@ Standard search relies on combining BM25 exact match metrics and applying hard-c
 
 **ML Ranking (Learning-to-Rank)**
 Learning to Rank models allow OpenSearch to evaluate dozens/hundreds of features simultaneously in complex arrangements. In real situations, user logs tracking `search_query -> item clicked -> ordered?` train complex Random Forest or XGBoost models (represented offline) to construct non-linear scoring algorithms predicting user preference, which allows an algorithm (instead of manual engineers) to continuously learn what users want to see!
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ea40016b-71b5-433a-b219-705594b68264" />
+
