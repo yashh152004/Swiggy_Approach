@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { SearchHero } from './components/SearchHero';
-import { RestaurantList } from './components/RestaurantList';
+import { ResultsList } from './components/ResultsList';
 import { useSearch } from './hooks/useSearch';
 import { useRestaurants } from './hooks/useRestaurants';
 
@@ -54,7 +54,7 @@ function App() {
           error={searchError}
           onSubmit={() => handleSearchSubmit(suggestions)}
         />
-        <RestaurantList 
+        <ResultsList 
           items={displayedItems}
           title={listTitle}
           loading={listLoading}
